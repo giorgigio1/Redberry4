@@ -1,0 +1,22 @@
+header {
+  width: 100%;
+  height: 80px;
+  background-color: aqua;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+img {
+  width: 150px;
+  height: 24px;
+  margin-right: 20px;
+}
+button {
+  width: 93px;
+  height: 40px;
+  background-color: #5d37f3;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin-left: 20px;
+}

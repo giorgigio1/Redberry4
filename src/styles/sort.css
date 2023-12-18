@@ -1,0 +1,37 @@
+.sort {
+  display: flex;
+  justify-content: center;
+  background-color: #e4e3eb;
+  padding: 30px 0;
+}
+.sort button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 10px;
+}
+.sort button:nth-child(1) {
+  color: #d6961c;
+  background-color: #ffbb2f;
+}
+.sort button:nth-child(2) {
+  color: #41a775;
+  background-color: #45ce8c;
+}
+.sort button:nth-child(3) {
+  color: #a22cc0;
+  background-color: #cf0fff;
+}
+.sort button:nth-child(4) {
+  color: #60be16;
+  background-color: #fa5757;
+}
+.sort button:nth-child(5) {
+  color: #4c8322;
+  background-color: #70cf25;
+}
+.sort button:nth-child(6) {
+  color: #17927c;
+  background-color: #08d2ae;
+}
