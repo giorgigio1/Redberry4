@@ -1,15 +1,16 @@
 import "./App.css";
-import Blog from "./components/Blog";
-import Header from "./components/Header";
-import Sort from "./components/Sort";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Main from "./components/Main";
+import BlogView from "./components/BlogView";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Blog />
-      <Sort />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/main" element={<Main />} />
+        <Route path="/blog" element={<BlogView />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

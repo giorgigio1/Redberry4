@@ -1,0 +1,16 @@
+.secondHeader {
+  height: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.secondHeader img {
+  width: 625px;
+  height: 200px;
+  margin-right: 80px;
+}
+.secondHeader h1 {
+  font-family: "FiraGO";
+  font-size: 60px;
+  margin-left: 80px;
+}
