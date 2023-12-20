@@ -11,3 +11,6 @@ body {
 * {
   font-family: "FiraGO";
 }
+body button:hover {
+  opacity: 0.5;
+}

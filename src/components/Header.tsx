@@ -5,9 +5,9 @@ import "../styles/header.css";
 const Header = () => {
   return (
     <header
-     className="header"
-    //  className={s.header}
-     >
+      className="header"
+      //  className={s.header}
+    >
       <img src={Logo} alt="" />
       <button>შესვლა</button>
     </header>

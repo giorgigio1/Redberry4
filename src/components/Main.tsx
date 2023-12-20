@@ -12,10 +12,6 @@ const Main = () => {
       <Sort />
       <section className="blogSection">
         <Blog />
-        <Blog />
-        <Blog />
-        <Blog />
-        <Blog />
       </section>
     </main>
   );
