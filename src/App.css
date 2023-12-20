@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "FiraGO";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://free.bboxtype.com/embedfonts/fonts.php?family=FiraGO&weight=400)
+    format("woff");
+}
 body {
   background-color: #e4e3eb;
+}
+* {
+  font-family: "FiraGO";
 }

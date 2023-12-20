@@ -1,43 +1,11 @@
 .sort {
   display: flex;
-  justify-content: center;
-  background-color: #e4e3eb;
-  padding: 30px 0 0 0;
+  justify-content: space-around;
+  padding: 20px 0;
 }
 .sort button {
   padding: 10px 20px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  margin: 10px 10px 0 10px;
-}
-.sort button:nth-child(1),
-.market {
-  color: #d6961c;
-  background-color: #ffbb2f;
-}
-.sort button:nth-child(2),
-.app {
-  color: #41a775;
-  background-color: #45ce8c;
-}
-.sort button:nth-child(3),
-.ai {
-  color: #a22cc0;
-  background-color: #cf0fff;
-}
-.sort button:nth-child(4),
-.ui {
-  color: #60be16;
-  background-color: #fa5757;
-}
-.sort button:nth-child(5),
-.reserch {
-  color: #4c8322;
-  background-color: #70cf25;
-}
-.sort button:nth-child(6),
-.figma {
-  color: #17927c;
-  background-color: #08d2ae;
 }

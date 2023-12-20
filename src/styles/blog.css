@@ -6,44 +6,44 @@
   gap: 103px;
 }
 .blog {
-  width: 470px;
+  width: 450px;
   height: 800px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .blog img {
-  width: 470px;
-  height: 470px;
+  width: 450px;
+  height: 450px;
   margin: 0;
   border-radius: 30px;
 }
-.author {
+.blog .author {
   font-weight: bolder;
 }
-.publishDate {
+.blog .publishDate {
   color: gray;
   font-size: 14px;
 }
-.categories button {
+.blog .categories button {
   padding: 10px 20px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   margin: 0 10px;
 }
-.description {
+.blog .description {
   text-align: justify;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.fullView {
+.blog .fullView {
   color: #5d37f3;
   text-decoration: none;
   font-weight: 500;
 }
-.arrowView {
+.blog .arrowView {
   margin-left: 7px;
 }

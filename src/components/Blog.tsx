@@ -1,4 +1,4 @@
-import giorgi from "../images/blog/giorgi.jpg";
+import tenis from "../images/blog/tenis.png";
 import { MdArrowOutward } from "react-icons/md";
 import "../styles/blog.css";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Blog = () => {
   return (
     <article className="blog">
-      <img src={giorgi} alt="" />
+      <img src={tenis} alt="" />
       <p className="author">გიორგი გიორგაძე</p>
       <label className="publishDate">02.11.2023</label>
       <h3 className="title">EOMM-ის მრჩეველთა საბჭოს ნინო ეგაძე შეუერთდა</h3>
