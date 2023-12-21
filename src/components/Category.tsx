@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
-import "../styles/sort.css";
+import "../styles/category.css";
 import axios from "axios";
 
-const Sort = () => {
-  const [categories, setCategories] = useState([]);
+interface CategoryProps {
+  id: number;
+  title: string;
+  background_color: string;
+  text_color: string;
+}
+
+const Category: React.FC = () => {
+  const [categories, setCategories] = useState<CategoryProps[]>([]);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -15,8 +22,8 @@ const Sort = () => {
     getCategories();
   }, []);
   return (
-    <div className="sort">
-      {categories.map((category: any) => (
+    <div className="category">
+      {categories.map((category) => (
         <button
           key={category.id}
           style={{
@@ -31,4 +38,4 @@ const Sort = () => {
   );
 };
 
-export default Sort;
+export default Category;

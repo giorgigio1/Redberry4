@@ -1,7 +1,11 @@
 import "../styles/blogView.css";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { MdArrowOutward } from "react-icons/md";
 
 interface BlogProps {
   id: number;
@@ -19,8 +23,23 @@ interface BlogProps {
   }[];
 }
 
+const PrevArrow = ({ onClick }: any) => (
+  <div className="custom-arrow prev" onClick={onClick}>
+    {/* <FaCircleArrowLeft  /> */}
+    &lt;
+  </div>
+);
+
+const NextArrow = ({ onClick }: any) => (
+  <div className="custom-arrow next" onClick={onClick}>
+    {/* <FaCircleArrowRight  /> */}
+    &gt;
+  </div>
+);
+
 const BlogView: React.FC = () => {
-  const id = useLocation().state.id;
+  const { id, blogs } = useLocation().state;
+  console.log("blogs", blogs);
 
   const [blog, setBlog] = useState<BlogProps | undefined>();
 
@@ -40,28 +59,77 @@ const BlogView: React.FC = () => {
     getBlogWithId();
   }, []);
 
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
+  };
+
   return (
-    <article className="blogView">
-      <img src={blog?.image} alt="" />
-      <p className="author">{blog?.author}</p>
-      <label className="publishDate">{blog?.publish_date}</label>
-      <span> • {blog?.email}</span>
-      <h2 className="title">{blog?.title}</h2>
-      <section className="categories">
-        {blog?.categories.map((category) => (
-          <button
-            key={category.id}
-            style={{
-              backgroundColor: category.background_color,
-              color: category.text_color,
-            }}
-          >
-            {category.title}
-          </button>
-        ))}
-      </section>
-      <p className="description">{blog?.description}</p>
-    </article>
+    <div>
+      <article className="blogView">
+        <img src={blog?.image} alt="" />
+        <p className="author">{blog?.author}</p>
+        <label className="publishDate">{blog?.publish_date}</label>
+        <span> • {blog?.email}</span>
+        <h2 className="title">{blog?.title}</h2>
+        <section className="categories">
+          {blog?.categories.map((category) => (
+            <button
+              key={category.id}
+              style={{
+                backgroundColor: category.background_color,
+                color: category.text_color,
+              }}
+            >
+              {category.title}
+            </button>
+          ))}
+        </section>
+        <p className="description">{blog?.description}</p>
+      </article>
+      <div className="secondPart" style={{ width: "85%", margin: "0 auto" }}>
+        <h1>მსგავსი სტატიები</h1>
+        <Slider {...settings} className="custom-slider">
+          {blogs.map((blog: any) => (
+            <article key={blog?.id} className="blog custom-slide">
+              <img src={blog?.image} alt="" />
+              <div>
+                <p className="author">{blog?.author}</p>
+                <label className="publishDate">{blog?.publish_date}</label>
+              </div>
+              <h3 className="title">{blog?.title}</h3>
+              <section className="categories">
+                {blog?.categories.map((category: any) => (
+                  <button
+                    key={category.id}
+                    style={{
+                      backgroundColor: category.background_color,
+                      color: category.text_color,
+                    }}
+                  >
+                    {category.title}
+                  </button>
+                ))}
+              </section>
+              <p className="description">{blog?.description}</p>
+              <Link
+                to={`/blog/${blog.id}`}
+                state={{ id: blog.id, blogs }}
+                className="fullView"
+              >
+                სრულად ნახვა
+                <MdArrowOutward className="arrowView" />
+              </Link>
+            </article>
+          ))}
+        </Slider>
+      </div>
+    </div>
   );
 };
 

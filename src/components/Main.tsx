@@ -1,6 +1,6 @@
 import Header from "./Header";
 import SecondHeader from "./SecondHeader";
-import Sort from "./Sort";
+import Category from "./Category";
 import Blog from "./Blog";
 import "../App.css";
 
@@ -9,7 +9,7 @@ const Main = () => {
     <main className="main">
       <Header />
       <SecondHeader />
-      <Sort />
+      <Category />
       <section className="blogSection">
         <Blog />
       </section>

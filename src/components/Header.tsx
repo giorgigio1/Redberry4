@@ -8,8 +8,10 @@ const Header = () => {
       className="header"
       //  className={s.header}
     >
-      <img src={Logo} alt="" />
-      <button>შესვლა</button>
+      <div className="header2">
+        <img src={Logo} alt="" />
+        <button>შესვლა</button>
+      </div>
     </header>
   );
 };

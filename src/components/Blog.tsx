@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-//b45d409e8ae208855a91869bc3a54d0289d90b3cdb404ca9208e3a6e4955c004
-
 interface Category {
   id: number;
   title: string;
@@ -51,7 +49,7 @@ const Blog: React.FC = () => {
             <p className="author">{blog.author}</p>
             <label className="publishDate">{blog.publish_date}</label>
           </div>
-          <h2 className="title">{blog.title}</h2>
+          <h3 className="title">{blog.title}</h3>
           <section className="categories">
             {blog.categories.map((category) => (
               <button
@@ -68,7 +66,7 @@ const Blog: React.FC = () => {
           <p className="description">{blog.description}</p>
           <Link
             to={`/blog/${blog.id}`}
-            state={{ id: blog.id }}
+            state={{ id: blog.id, blogs }}
             className="fullView"
           >
             სრულად ნახვა

@@ -3,14 +3,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 84%;
+  margin: 0 auto;
 }
 .secondHeader img {
   width: 625px;
   height: 200px;
-  margin-right: 80px;
 }
 .secondHeader h1 {
   font-family: "FiraGO";
-  font-size: 60px;
-  margin-left: 80px;
+  font-size: 64px;
 }
