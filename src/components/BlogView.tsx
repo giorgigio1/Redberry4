@@ -6,6 +6,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { MdArrowOutward } from "react-icons/md";
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from "react-icons/io";
 
 interface BlogProps {
   id: number;
@@ -25,21 +29,18 @@ interface BlogProps {
 
 const PrevArrow = ({ onClick }: any) => (
   <div className="custom-arrow prev" onClick={onClick}>
-    {/* <FaCircleArrowLeft  /> */}
-    &lt;
+    <IoIosArrowDropleftCircle />
   </div>
 );
 
 const NextArrow = ({ onClick }: any) => (
   <div className="custom-arrow next" onClick={onClick}>
-    {/* <FaCircleArrowRight  /> */}
-    &gt;
+    <IoIosArrowDroprightCircle style={{ fontSize: "50px", color: "#5D37F3" }} />
   </div>
 );
 
 const BlogView: React.FC = () => {
   const { id, blogs } = useLocation().state;
-  console.log("blogs", blogs);
 
   const [blog, setBlog] = useState<BlogProps | undefined>();
 
@@ -57,7 +58,7 @@ const BlogView: React.FC = () => {
       setBlog(data);
     };
     getBlogWithId();
-  }, []);
+  }, [id]);
 
   const settings = {
     dots: false,
@@ -92,8 +93,8 @@ const BlogView: React.FC = () => {
         </section>
         <p className="description">{blog?.description}</p>
       </article>
-      <div className="secondPart" style={{ width: "85%", margin: "0 auto" }}>
-        <h1>მსგავსი სტატიები</h1>
+      <div className="slider">
+        <h2 className="similarArticles">მსგავსი სტატიები</h2>
         <Slider {...settings} className="custom-slider">
           {blogs.map((blog: any) => (
             <article key={blog?.id} className="blog custom-slide">

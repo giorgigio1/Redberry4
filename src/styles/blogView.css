@@ -37,3 +37,36 @@
   color: #404049;
   line-height: 28px;
 }
+/* Slider */
+.similarArticles {
+  font-size: 32px;
+  margin: 100px 0 50px 14%;
+}
+.custom-slider {
+  width: 72%;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+.custom-slide {
+  width: 410px !important;
+  height: 700px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  outline: none;
+}
+.custom-arrow {
+  position: absolute;
+  top: -75px;
+  font-size: 50px;
+  cursor: pointer;
+}
+.custom-arrow.prev {
+  right: 105px;
+  color: lightgray;
+}
+
+.custom-arrow.next {
+  right: 44px;
+  color: #5d37f3;
+}

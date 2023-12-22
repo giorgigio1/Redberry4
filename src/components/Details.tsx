@@ -8,7 +8,7 @@ const Details = () => {
   return (
     <div className="details">
       <Header />
-      <Link to="/main">
+      <Link to="/home">
         <img className="backArrow" src={arrowBack} alt="" />
       </Link>
       <BlogView />
