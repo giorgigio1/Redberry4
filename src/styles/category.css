@@ -1,12 +1,14 @@
 .category {
   display: flex;
-  justify-content: space-around;
-  padding: 20px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 56%;
+  margin: 0 auto;
+  gap: 10px;
 }
 .category button {
   padding: 10px 20px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  margin: 0 10px;
 }
