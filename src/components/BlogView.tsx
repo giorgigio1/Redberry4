@@ -10,30 +10,19 @@ import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
+import { BlogProps } from "../types";
 
-interface BlogProps {
-  id: number;
-  author: string;
-  title: string;
-  description: string;
-  image: string;
-  publish_date: string;
-  email: string;
-  categories: {
-    id: number;
-    title: string;
-    background_color: string;
-    text_color: string;
-  }[];
+interface ArrowProps {
+  onClick?: () => void;
 }
 
-const PrevArrow = ({ onClick }: any) => (
+const PrevArrow = ({ onClick }: ArrowProps) => (
   <div className="custom-arrow prev" onClick={onClick}>
     <IoIosArrowDropleftCircle />
   </div>
 );
 
-const NextArrow = ({ onClick }: any) => (
+const NextArrow = ({ onClick }: ArrowProps) => (
   <div className="custom-arrow next" onClick={onClick}>
     <IoIosArrowDroprightCircle style={{ fontSize: "50px", color: "#5D37F3" }} />
   </div>
@@ -42,7 +31,7 @@ const NextArrow = ({ onClick }: any) => (
 const BlogView: React.FC = () => {
   const { id, blogs } = useLocation().state;
 
-  const [blog, setBlog] = useState<BlogProps | undefined>();
+  const [blog, setBlog] = useState<BlogProps>();
 
   useEffect(() => {
     const getBlogWithId = async () => {
@@ -96,7 +85,7 @@ const BlogView: React.FC = () => {
       <div className="slider">
         <h2 className="similarArticles">მსგავსი სტატიები</h2>
         <Slider {...settings} className="custom-slider">
-          {blogs.map((blog: any) => (
+          {blogs.map((blog: BlogProps) => (
             <article key={blog?.id} className="blog custom-slide">
               <img src={blog?.image} alt="" />
               <div>
@@ -105,7 +94,7 @@ const BlogView: React.FC = () => {
               </div>
               <h3 className="title">{blog?.title}</h3>
               <section className="categories">
-                {blog?.categories.map((category: any) => (
+                {blog?.categories.map((category) => (
                   <button
                     key={category.id}
                     style={{
@@ -122,6 +111,7 @@ const BlogView: React.FC = () => {
                 to={`/blog/${blog.id}`}
                 state={{ id: blog.id, blogs }}
                 className="fullView"
+                onClick={() => window.scrollTo(0, 0)}
               >
                 სრულად ნახვა
                 <MdArrowOutward className="arrowView" />

@@ -3,23 +3,7 @@ import "../styles/blog.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-interface Category {
-  id: number;
-  title: string;
-  background_color: string;
-  text_color: string;
-}
-
-interface BlogProps {
-  id: number;
-  author: string;
-  title: string;
-  description: string;
-  image: string;
-  publish_date: string;
-  categories: Category[];
-}
+import { BlogProps } from "../types";
 
 const Blog: React.FC = () => {
   const [blogs, setBlogs] = useState<BlogProps[]>([]);
