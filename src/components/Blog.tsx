@@ -25,7 +25,7 @@ const Blog: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <section className="blogSection">
       {blogs.map((blog) => (
         <article key={blog.id} className="blog">
           <img src={blog.image} alt="" />
@@ -58,7 +58,7 @@ const Blog: React.FC = () => {
           </Link>
         </article>
       ))}
-    </>
+    </section>
   );
 };
 

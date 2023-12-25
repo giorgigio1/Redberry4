@@ -1,0 +1,25 @@
+.modal-title {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0;
+}
+.modal-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+.modal-input {
+  padding: 10px;
+  border: 2px solid #5d37f3;
+  border-radius: 12px;
+}
+.modal-input::placeholder {
+  color: #85858d;
+}
+.modal-button {
+  width: 100%;
+  margin: 30px 0 10px 0;
+  height: 44px;
+}
+.ant-modal-close-x {
+  color: black;
+}
