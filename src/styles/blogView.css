@@ -53,7 +53,6 @@
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  outline: none;
 }
 .custom-arrow {
   position: absolute;

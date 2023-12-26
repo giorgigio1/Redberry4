@@ -5,6 +5,7 @@ import LoginModal from "./LoginModal";
 
 const Header: React.FC = () => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const openLoginModal = () => {
     setLoginModalOpen(true);
@@ -19,11 +20,23 @@ const Header: React.FC = () => {
       <header className="header">
         <div className="header2">
           <img src={Logo} alt="" />
-          <button onClick={openLoginModal}>შესვლა</button>
+          {isLoggedIn && (
+            <div>
+              <button className="mr-3">დაამატე ბლოგი</button>
+              <button onClick={() => setIsLoggedIn(false)}>გამოსვლა</button>
+            </div>
+          )}
+          {!isLoggedIn && <button onClick={openLoginModal}>შესვლა</button>}
         </div>
       </header>
 
-      {isLoginModalOpen && <LoginModal visible={isLoginModalOpen} onCancel={closeLoginModal} />}
+      {isLoginModalOpen && (
+        <LoginModal
+          visible={isLoginModalOpen}
+          onCancel={closeLoginModal}
+          loggedIn={setIsLoggedIn}
+        />
+      )}
     </>
   );
 };
