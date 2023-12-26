@@ -3,8 +3,6 @@ import SecondHeader from "./SecondHeader";
 import Category from "./Category";
 import Blog from "./Blog";
 import "../App.css";
-import { useState } from "react";
-import LoginModal from "./LoginModal";
 
 const Main = () => {
 

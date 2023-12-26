@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal, Input, Button } from "antd";
 import "../styles/modal.css";
 import erroPicture from "../images/loginModal/error.png";
 import pwichka from "../images/loginModal/pwichka.png";
-import axios from "axios";
+import { baseApi } from "../baseAI";
 
 interface EmailModalProps {
   visible: boolean;
@@ -30,18 +30,7 @@ const LoginModal: React.FC<EmailModalProps> = ({
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(
-        "https://api.blog.redberryinternship.ge/api/login",
-        user,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization:
-              "Bearer b45d409e8ae208855a91869bc3a54d0289d90b3cdb404ca9208e3a6e4955c004",
-          },
-        }
-      );
+      await baseApi.post("/login", user);
       setUser({ ...user, isError: false, isSuccess: true });
       loggedIn(true);
     } catch (error) {

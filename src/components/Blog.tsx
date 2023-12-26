@@ -2,23 +2,15 @@ import { MdArrowOutward } from "react-icons/md";
 import "../styles/blog.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { BlogProps } from "../types";
+import { baseApi } from "../baseAI";
 
 const Blog: React.FC = () => {
   const [blogs, setBlogs] = useState<BlogProps[]>([]);
 
   useEffect(() => {
     const getBlog = async () => {
-      const { data } = await axios.get(
-        "https://api.blog.redberryinternship.ge/api/blogs",
-        {
-          headers: {
-            Authorization:
-              "Bearer b45d409e8ae208855a91869bc3a54d0289d90b3cdb404ca9208e3a6e4955c004",
-          },
-        }
-      );
+      const { data } = await baseApi.get("/blogs");
       setBlogs(data.data);
     };
     getBlog();
@@ -52,6 +44,7 @@ const Blog: React.FC = () => {
             to={`/blog/${blog.id}`}
             state={{ id: blog.id, blogs }}
             className="fullView"
+            onClick={() => window.scrollTo(0, 0)}
           >
             სრულად ნახვა
             <MdArrowOutward className="arrowView" />

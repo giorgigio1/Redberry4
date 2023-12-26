@@ -1,7 +1,6 @@
 import "../styles/blogView.css";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,6 +10,7 @@ import {
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
 import { BlogProps } from "../types";
+import { baseApi } from "../baseAI";
 
 interface ArrowProps {
   onClick?: () => void;
@@ -35,15 +35,7 @@ const BlogView: React.FC = () => {
 
   useEffect(() => {
     const getBlogWithId = async () => {
-      const { data } = await axios.get(
-        `https://api.blog.redberryinternship.ge/api/blogs/${id}`,
-        {
-          headers: {
-            Authorization:
-              "Bearer b45d409e8ae208855a91869bc3a54d0289d90b3cdb404ca9208e3a6e4955c004",
-          },
-        }
-      );
+      const { data } = await baseApi.get(`blogs/${id}`);
       setBlog(data);
     };
     getBlogWithId();

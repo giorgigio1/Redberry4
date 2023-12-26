@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styles/category.css";
-import axios from "axios";
+import { baseApi } from "../baseAI";
 
 interface CategoryProps {
   id: number;
@@ -14,9 +14,7 @@ const Category: React.FC = () => {
 
   useEffect(() => {
     const getCategories = async () => {
-      const { data } = await axios.get(
-        "https://api.blog.redberryinternship.ge/api/categories"
-      );
+      const { data} = await baseApi.get("/categories");
       setCategories(data.data);
     };
     getCategories();
