@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Input, Button } from "antd";
 import "../styles/modal.css";
 import erroPicture from "../images/loginModal/error.png";
@@ -33,6 +33,7 @@ const LoginModal: React.FC<EmailModalProps> = ({
       await baseApi.post("/login", user);
       setUser({ ...user, isError: false, isSuccess: true });
       loggedIn(true);
+      localStorage.setItem("isLoggedIn", JSON.stringify(true));
     } catch (error) {
       setUser({ ...user, isError: true, isSuccess: false });
     }
