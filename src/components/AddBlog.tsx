@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import AddBlogHeader from "./AddBlogHeader";
 import { InputFields } from "./global/InputFields";
 import { Textarea } from "./global/Textarea";
+import arrowBackGray from "../images/blog/arrowLeftGray.png";
+import upload from "../images/blog/upload.png";
 
 const AddBlog = () => {
   return (
@@ -10,8 +12,16 @@ const AddBlog = () => {
       <AddBlogHeader />
       <div className="addBlog">
         <h1>ბლოგის დამატება</h1>
-        <h5>ატვირთეთ ფოტო</h5>
-        <input type="file" />
+        <div className="uploadContainer">
+          <h5>ატვირთეთ ფოტო</h5>
+          <div className="upload">
+            <input type="file" className="" />
+            <img src={upload} alt="" />
+            <p>
+              ჩააგდეთ ფაილი აქ ან <span>აირჩიე ფაილი</span>
+            </p>
+          </div>
+        </div>
         <div className="addBlog2">
           <InputFields
             label="სათაური *"
@@ -58,7 +68,9 @@ const AddBlog = () => {
           </button>
         </div>
       </div>
-      <Link to="/home">Home Page</Link>
+      <Link to="/home" className="backArrow">
+        <img src={arrowBackGray} alt="" />
+      </Link>
     </div>
   );
 };
