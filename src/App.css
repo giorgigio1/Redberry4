@@ -22,3 +22,11 @@ h3 {
 button {
   outline: none !important;
 }
+input::placeholder,
+textarea::placeholder {
+  font-size: 12px;
+  color: #85858d;
+}
+ul > li:only-child {
+  list-style: none;
+}

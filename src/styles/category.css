@@ -12,3 +12,9 @@
   border-radius: 25px;
   cursor: pointer;
 }
+ option {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
