@@ -171,7 +171,7 @@ const AddBlog = () => {
                 </button>
               </div>
             </div>
-            <Link to="/home" className="backArrow">
+            <Link to="/" className="backArrow">
               <img src={arrowBackGray} alt="" />
             </Link>
           </div>
