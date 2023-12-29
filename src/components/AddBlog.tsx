@@ -4,7 +4,7 @@ import AddBlogHeader from "./AddBlogHeader";
 import { InputFields } from "./global/InputFields";
 import arrowBackGray from "../images/blog/arrowLeftGray.png";
 import upload from "../images/blog/upload.png";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import {
   emailCorrect,
   minFourSymbols,
@@ -15,6 +15,8 @@ import {
 import { useEffect, useState } from "react";
 import { baseApi } from "../baseAI";
 import { CategoryProps } from "../types";
+import { MdOutlineClose } from "react-icons/md";
+import uploadedImage from "../images/blog/gallery.png";
 
 const AddBlog = () => {
   const [categories, setCategories] = useState<CategoryProps[]>([]);
@@ -38,108 +40,143 @@ const AddBlog = () => {
         categories: [],
         email: "",
       }}
-      // validationSchema={}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={async (values) => {
+        try {
+          const formData = new FormData();
+          formData.append("title", values.title);
+          formData.append("description", values.description);
+          formData.append("image", values.image);
+          formData.append("author", values.author);
+          formData.append("publish_date", values.publish_date);
+          formData.append("categories", JSON.stringify(values.categories));
+          formData.append("email", values.email);
+          await baseApi.post("/blogs", formData);
+        } catch (error) {
+          console.error("Error submitting form:", error);
+        }
       }}
     >
-      <Form>
-        <div className="addBlodBody">
-          <AddBlogHeader />
-          <div className="addBlog">
-            <h1>ბლოგის დამატება</h1>
-            <div className="uploadContainer">
+      {({ values, setFieldValue }) => (
+        <Form>
+          <div className="addBlodBody">
+            <AddBlogHeader />
+            <div className="addBlog">
+              <h1>ბლოგის დამატება</h1>
               <h5>ატვირთეთ ფოტო</h5>
-              <div className="upload">
-                <input type="file" className="" />
-                <img src={upload} alt="" />
-                <p>
-                  ჩააგდეთ ფაილი აქ ან <span>აირჩიე ფაილი</span>
-                </p>
+              {values.image ? (
+                <div className="uploadedImage">
+                  <div>
+                    <img src={uploadedImage} alt="" />
+                    <span className="ml-3">
+                      {(values.image as unknown as any)?.name}
+                    </span>
+                  </div>
+                  <MdOutlineClose
+                    style={{ cursor: "pointer", fontSize: "20px" }}
+                    onClick={() => setFieldValue("image", "")}
+                  />
+                </div>
+              ) : (
+                <div className="uploadContainer">
+                  <div className="upload">
+                    <input
+                      type="file"
+                      id="image"
+                      name="image"
+                      onChange={(event) => {
+                        setFieldValue(
+                          "image",
+                          event?.currentTarget?.files?.[0]
+                        );
+                      }}
+                    />
+                    <img src={upload} alt="" />
+                    <p>
+                      ჩააგდეთ ფაილი აქ ან <span>აირჩიე ფაილი</span>
+                    </p>
+                  </div>
+                </div>
+              )}
+              <div className="addBlog2">
+                <InputFields
+                  name="author"
+                  label="ავტორი *"
+                  placeholder="შეიყვანეთ ავტორი"
+                  type="text"
+                  validation={[
+                    { func: minFourSymbols, message: "მინიმუმ 4 სიმბოლო" },
+                    { func: minTwoWords, message: "მინიმუმ 2 სიტყვა" },
+                    {
+                      func: onlyGeorgianLetter,
+                      message: "მხოლოდ ქართული ასოები",
+                    },
+                  ]}
+                />
+                <InputFields
+                  name="title"
+                  label="სათაური *"
+                  placeholder="შეიყვანეთ სათაური"
+                  type="text"
+                  validation={[
+                    { func: minTwoSymbols, message: "მინიმუმ 2 სიმბოლო" },
+                  ]}
+                />
               </div>
-            </div>
-            <div className="addBlog2">
               <InputFields
-                name="author"
-                label="ავტორი *"
-                placeholder="შეიყვანეთ ავტორი"
-                type="text"
-                validation={[
-                  { func: minFourSymbols, message: "მინიმუმ 4 სიმბოლო" },
-                  { func: minTwoWords, message: "მინიმუმ 2 სიტყვა" },
-                  {
-                    func: onlyGeorgianLetter,
-                    message: "მხოლოდ ქართული ასოები",
-                  },
-                ]}
-              />
-              <InputFields
-                name="title"
-                label="სათაური *"
-                placeholder="შეიყვანეთ სათაური"
-                type="text"
                 validation={[
                   { func: minTwoSymbols, message: "მინიმუმ 2 სიმბოლო" },
                 ]}
+                label="აღწერა *"
+                placeholder="შეიყვანეთ აღწერა"
+                name="description"
+                type="textarea"
               />
-            </div>
-            <InputFields
-              validation={[
-                { func: minTwoSymbols, message: "მინიმუმ 2 სიმბოლო" },
-              ]}
-              label="აღწერა *"
-              placeholder="შეიყვანეთ აღწერა"
-              name="description"
-              type="textarea"
-            />
-            <div className="addBlog2">
-              <InputFields
-                name="date"
-                label="გამოქვეყნების თარიღი *"
-                type="date"
-              />
-              <div className="kategoria">
-                <label>კატეგორია *</label>
-                <select>
-                  <option hidden>აირჩიეთ ხარისხი</option>
-                  {categories.map((category) => (
-                    <option key={category.id}>
-                      <div
-                        style={{
-                          backgroundColor: category.background_color,
-                          color: category.text_color,
-                        }}
-                      >
+              <div className="addBlog2">
+                <InputFields
+                  name="publish_date"
+                  label="გამოქვეყნების თარიღი *"
+                  type="date"
+                />
+                <div className="kategoria">
+                  <label>კატეგორია *</label>
+                  <Field multiple as="select" name="categories">
+                    <option hidden>აირჩიეთ ხარისხი</option>
+                    {categories.map((category) => (
+                      <option key={category.id} value={category.id}>
                         {category.title}
-                      </div>
-                    </option>
-                  ))}
-                </select>
+                      </option>
+                    ))}
+                  </Field>
+                </div>
+              </div>
+              <div className="addBlog2">
+                <InputFields
+                  name="email"
+                  label="ელ-ფოსტა *"
+                  placeholder="Example@redberry.ge"
+                  type="email"
+                  validation={[
+                    {
+                      func: emailCorrect,
+                      message: "მეილი უნდა მთავრდებოდეს @redberry.ge-ით",
+                      strong: true,
+                    },
+                  ]}
+                />
+                <div className="w-50"></div>
+              </div>
+              <div>
+                <button className="gamoqveyneba w-50 float-right" type="submit">
+                  გამოქვეყნება
+                </button>
               </div>
             </div>
-            <div className="addBlog2">
-              <InputFields
-                name="email"
-                label="ელ-ფოსტა *"
-                placeholder="Example@redberry.ge"
-                type="email"
-                validation={[
-                  { func: emailCorrect, message: "მეილი უნდა მთავრდებოდეს @redberry.ge-ით", strong: true },
-                ]}
-              />
-              <div className="w-50"></div>
-            </div>
-            <div>
-              <button className="gamoqveyneba w-50 float-right" type="submit">
-                გამოქვეყნება
-              </button>
-            </div>
+            <Link to="/home" className="backArrow">
+              <img src={arrowBackGray} alt="" />
+            </Link>
           </div>
-          <Link to="/home" className="backArrow">
-            <img src={arrowBackGray} alt="" />
-          </Link>
-        </div>
-      </Form>
+        </Form>
+      )}
     </Formik>
   );
 };

@@ -1,31 +1,3 @@
-// import * as Yup from "yup";
-
-// const georgianLettersRegex = /^[\u10A0-\u10EA]+$/;
-
-// export const validationSchema = Yup.object().shape({
-//   title: Yup.string()
-//     .required("")
-//     .min(2),
-//   description: Yup.string()
-//     .required()
-//     .min(2, "At least 2 characters required"),
-//   image: Yup.string().required("Required"),
-//   email: Yup.string().email("Invalid email").required("Required"),
-//   author: Yup.string()
-//     // .required("Required")
-//     .matches(georgianLettersRegex, "onlyGeorgianLetter")
-//     .test("min-words", "minTwoWords", (value) => {
-//       if (!value) {
-//         return false;
-//       }
-//       const words = value.split(/\s+/);
-//       return words.length >= 4;
-//     })
-//     .min(4, "minFourSymbol"),
-//   publish_date: Yup.date().required("Required"),
-//   categories: Yup.array().required("Required"),
-// });
-
 export const minTwoSymbols = (value: string) => {
   if (!value) {
     return false;

@@ -17,6 +17,7 @@
   height: 410px;
   margin: 0;
   border-radius: 30px;
+  object-fit: cover;
 }
 .blog .author {
   font-weight: bolder;

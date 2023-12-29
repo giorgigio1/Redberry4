@@ -1,4 +1,4 @@
-import { ErrorMessage, Field, useField } from "formik";
+import {  Field, useField } from "formik";
 import { useState } from "react";
 import styled from "styled-components";
 import errorImage from "../../images/loginModal/error.png";
@@ -22,8 +22,7 @@ export const InputFields = ({
   type,
   validation,
 }: InputFieldsProps) => {
-  const [field, meta] = useField(name || "");
-  console.log("meta", meta);
+  const [field] = useField(name || "");
   const [touched, setTouched] = useState(false);
   return (
     <WrapperDiv>
@@ -38,7 +37,7 @@ export const InputFields = ({
       />
       <ul>
         {validation &&
-          validation.map((item, index): any => (
+          validation.map((item, index) => (
             <li
               key={index}
               className={
@@ -50,9 +49,8 @@ export const InputFields = ({
               }
             >
               {item.strong ? (
-                !item.func(field.value) ? (
+                !item.func(field.value) && touched ? (
                   <strong>
-                    {" "}
                     <img src={errorImage} alt="" /> {item.message}
                   </strong>
                 ) : (
