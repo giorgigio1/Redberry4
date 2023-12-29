@@ -22,7 +22,9 @@ export const InputFields = ({
   type,
   validation,
 }: InputFieldsProps) => {
+
   const [field] = useField(name || "");
+
   const [touched, setTouched] = useState(false);
   return (
     <WrapperDiv>
