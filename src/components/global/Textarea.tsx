@@ -25,7 +25,7 @@ export const Textarea = ({
   validation,
 }: TextareaProps) => {
   const [touched, setTouched] = useState(false);
-  const [field, meta] = useField(name || "");
+  const [field] = useField(name || "");
 
   return (
     <TextareaWrapper>

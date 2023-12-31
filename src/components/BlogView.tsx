@@ -11,6 +11,8 @@ import {
 } from "react-icons/io";
 import { BlogProps } from "../types";
 import { baseApi } from "../baseAI";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface ArrowProps {
   onClick?: () => void;

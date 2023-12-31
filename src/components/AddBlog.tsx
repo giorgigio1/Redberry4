@@ -17,6 +17,7 @@ import { baseApi } from "../baseAI";
 import { CategoryProps } from "../types";
 import { MdOutlineClose } from "react-icons/md";
 import uploadedImage from "../images/blog/gallery.png";
+import { MultiSelectField } from "./global/MultiSelectField";
 
 const AddBlog = () => {
   const [categories, setCategories] = useState<CategoryProps[]>([]);
@@ -139,14 +140,17 @@ const AddBlog = () => {
                 />
                 <div className="kategoria">
                   <label>კატეგორია *</label>
-                  <Field multiple as="select" name="categories">
-                    <option hidden>აირჩიეთ ხარისხი</option>
-                    {categories.map((category) => (
-                      <option key={category.id} value={category.id}>
-                        {category.title}
-                      </option>
-                    ))}
-                  </Field>
+                  <Field
+                    name="categories"
+                    isMulti
+                    component={MultiSelectField}
+                    options={categories.map((category) => ({
+                      value: category.id,
+                      label: category.title,
+                      color: category.background_color,
+                      textColor: category.text_color,
+                    }))}
+                  />
                 </div>
               </div>
               <div className="addBlog2">
