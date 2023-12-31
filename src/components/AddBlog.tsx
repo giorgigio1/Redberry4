@@ -49,7 +49,7 @@ const AddBlog = () => {
           formData.append("image", values.image);
           formData.append("author", values.author);
           formData.append("publish_date", values.publish_date);
-          formData.append("categories", JSON.stringify(values.categories));
+          formData.append("categories", JSON.stringify(values.categories.map((v: any) => v.value)));
           formData.append("email", values.email);
           await baseApi.post("/blogs", formData);
         } catch (error) {
