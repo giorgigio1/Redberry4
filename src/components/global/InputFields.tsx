@@ -1,4 +1,4 @@
-import {  Field, useField } from "formik";
+import { Field, useField } from "formik";
 import { useState } from "react";
 import styled from "styled-components";
 import errorImage from "../../images/loginModal/error.png";
@@ -22,7 +22,6 @@ export const InputFields = ({
   type,
   validation,
 }: InputFieldsProps) => {
-
   const [field] = useField(name || "");
 
   const [touched, setTouched] = useState(false);
@@ -36,6 +35,15 @@ export const InputFields = ({
         placeholder={placeholder}
         rows={4}
         as={type === "textarea" ? "textarea" : "input"}
+        className={
+          touched &&
+          validation &&
+          validation.every((item) => item.func(field.value))
+            ? "success"
+            : type === "date" && touched
+            ? "success"
+            : ""
+        }
       />
       <ul>
         {validation &&
@@ -79,12 +87,31 @@ const WrapperDiv = styled.div`
     color: #1a1a1f;
     font-weight: bolder;
   }
-  & input {
+  & input,
+  & input[type="date"],
+  & textarea {
     padding: 10px 10px;
     margin: 8px 0;
     border-radius: 15px;
-    border: 1px solid #e4e3eb;
+    border: 1px solid #ccc;
     outline: none;
+
+    &:focus {
+      border-color: #4caf50;
+    }
+  }
+
+  & input[type="date"].fail,
+  & input.fail,
+  & textarea.fail {
+    border-color: red;
+    background-color: #ffe6e6;
+  }
+  & input[type="date"].success,
+  & input.success,
+  & textarea.success {
+    border-color: #4caf50;
+    background-color: #f8fff8;
   }
   span {
     color: #85858d;

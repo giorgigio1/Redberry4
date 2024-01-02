@@ -18,9 +18,11 @@ import { CategoryProps } from "../types";
 import { MdOutlineClose } from "react-icons/md";
 import uploadedImage from "../images/blog/gallery.png";
 import { MultiSelectField } from "./global/MultiSelectField";
+import SuccessModal from "./SuccessModal";
 
 const AddBlog = () => {
   const [categories, setCategories] = useState<CategoryProps[]>([]);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -41,23 +43,31 @@ const AddBlog = () => {
         categories: [],
         email: "",
       }}
-      onSubmit={async (values) => {
-        try {
-          const formData = new FormData();
-          formData.append("title", values.title);
-          formData.append("description", values.description);
-          formData.append("image", values.image);
-          formData.append("author", values.author);
-          formData.append("publish_date", values.publish_date);
-          formData.append("categories", JSON.stringify(values.categories.map((v: any) => v.value)));
-          formData.append("email", values.email);
-          await baseApi.post("/blogs", formData);
-        } catch (error) {
-          console.error("Error submitting form:", error);
+      onSubmit={async (values, { setSubmitting, setErrors }) => {
+        if (Object.values(values).every((value) => value !== "")) {
+          try {
+            const formData = new FormData();
+            formData.append("title", values.title);
+            formData.append("description", values.description);
+            formData.append("image", values.image);
+            formData.append("author", values.author);
+            formData.append("publish_date", values.publish_date);
+            formData.append(
+              "categories",
+              JSON.stringify(values.categories.map((v: any) => v.value))
+            );
+            formData.append("email", values.email);
+            await baseApi.post("/blogs", formData);
+          } catch (error) {
+          } finally {
+            setSubmitting(false);
+          }
+        } else {
+          setSubmitting(false);
         }
       }}
     >
-      {({ values, setFieldValue }) => (
+      {({ values, setFieldValue, isValid, dirty, isSubmitting }) => (
         <Form>
           <div className="addBlodBody">
             <AddBlogHeader />
@@ -144,11 +154,11 @@ const AddBlog = () => {
                     name="categories"
                     isMulti
                     component={MultiSelectField}
-                    options={categories.map((category) => ({
-                      value: category.id,
-                      label: category.title,
-                      color: category.background_color,
-                      textColor: category.text_color,
+                    options={categories.map((item: any) => ({
+                      value: item.id,
+                      label: item.title,
+                      textColor: item.text_color,
+                      color: item.background_color,
                     }))}
                   />
                 </div>
@@ -170,7 +180,21 @@ const AddBlog = () => {
                 <div className="w-50"></div>
               </div>
               <div>
-                <button className="gamoqveyneba w-50 float-right" type="submit">
+                <button
+                  className="gamoqveyneba w-50 float-right"
+                  type="submit"
+                  disabled={
+                    !isValid ||
+                    !dirty ||
+                    isSubmitting ||
+                    Object.values(values).some((value) => value === "")
+                  }
+                  style={{
+                    backgroundColor: isValid ? "blue" : "gray",
+                    transition: "background-color 0.3s ease-in-out",
+                  }}
+                  onClick={() => setVisible(true)}
+                >
                   გამოქვეყნება
                 </button>
               </div>
@@ -179,6 +203,7 @@ const AddBlog = () => {
               <img src={arrowBackGray} alt="" />
             </Link>
           </div>
+          {visible && <SuccessModal visible={visible} />}
         </Form>
       )}
     </Formik>
