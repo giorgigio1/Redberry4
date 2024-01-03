@@ -12,7 +12,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ visible }) => {
   const navigate = useNavigate();
 
   return (
-    <Modal centered open={visible} footer={[]}>
+    <Modal centered open={visible} onCancel={() => navigate("/")} footer={[]}>
       <div className="container">
         <figure className="text-center mt-5">
           <img className="align-items-center" src={success} alt="" />

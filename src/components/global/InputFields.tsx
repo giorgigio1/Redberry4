@@ -25,6 +25,12 @@ export const InputFields = ({
   const [field] = useField(name || "");
 
   const [touched, setTouched] = useState(false);
+
+  const isValid =
+    touched &&
+    validation &&
+    validation.every((item) => item.func(field.value));
+
   return (
     <WrapperDiv>
       <label>{label}</label>
@@ -35,15 +41,11 @@ export const InputFields = ({
         placeholder={placeholder}
         rows={4}
         as={type === "textarea" ? "textarea" : "input"}
-        className={
-          touched &&
-          validation &&
-          validation.every((item) => item.func(field.value))
-            ? "success"
-            : type === "date" && touched
-            ? "success"
-            : ""
-        }
+        className={`
+          ${touched && isValid ? "success" : ""}
+          ${type === "date" && touched ? "success" : ""}
+          ${touched && !isValid ? "fail" : ""}
+        `}
       />
       <ul>
         {validation &&
@@ -51,23 +53,15 @@ export const InputFields = ({
             <li
               key={index}
               className={
-                touched
-                  ? !item.func(field.value)
-                    ? "text-danger"
-                    : "text-success"
-                  : ""
+                touched ? (!item.func(field.value) ? "text-danger" : "text-success") : ""
               }
             >
-              {item.strong ? (
-                !item.func(field.value) && touched ? (
-                  <strong>
-                    <img src={errorImage} alt="" /> {item.message}
-                  </strong>
-                ) : (
-                  ""
-                )
+              {item.strong && touched && !item.func(field.value) ? (
+                <strong>
+                  <img src={errorImage} alt="" /> {item.message}
+                </strong>
               ) : (
-                item.message
+                !item.strong && item.message
               )}
             </li>
           ))}

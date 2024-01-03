@@ -24,7 +24,9 @@ export const onlyGeorgianLetter = (value: string) => {
   if (!value) {
     return false;
   }
-  const georgianLettersRegex = /^[\u10A0-\u10EA\s]+$/;
+
+  const georgianLettersRegex =
+    /[^\u10A0-\u10FF]*[\u10A0-\u10FF]+[^\u10A0-\u10FF]*/;
   return georgianLettersRegex.test(value);
 };
 

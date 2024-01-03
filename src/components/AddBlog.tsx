@@ -187,10 +187,18 @@ const AddBlog = () => {
                     !isValid ||
                     !dirty ||
                     isSubmitting ||
-                    Object.values(values).some((value) => value === "")
+                    Object.values(values).some((value) => value === "") ||
+                    !emailCorrect(values.email)
                   }
                   style={{
-                    backgroundColor: isValid ? "blue" : "gray",
+                    backgroundColor:
+                      !isValid ||
+                      !dirty ||
+                      isSubmitting ||
+                      Object.values(values).some((value) => value === "") ||
+                      !emailCorrect(values.email)
+                        ? "#E4E3EB"
+                        : "blue",
                     transition: "background-color 0.3s ease-in-out",
                   }}
                   onClick={() => setVisible(true)}
