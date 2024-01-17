@@ -52,6 +52,7 @@ const AddBlog = () => {
             formData.append("image", values.image);
             formData.append("author", values.author);
             formData.append("publish_date", values.publish_date);
+            console.log("values", values)
             formData.append(
               "categories",
               JSON.stringify(values.categories.map((v: any) => v.value))

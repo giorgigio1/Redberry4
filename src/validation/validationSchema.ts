@@ -27,7 +27,9 @@ export const onlyGeorgianLetter = (value: string) => {
 
   const georgianLettersRegex =
     /[^\u10A0-\u10FF]*[\u10A0-\u10FF]+[^\u10A0-\u10FF]*/;
-  return georgianLettersRegex.test(value);
+
+  const noNumbersRegex = /^[^\d]+$/;
+  return georgianLettersRegex.test(value) && noNumbersRegex.test(value);
 };
 
 export const emailCorrect = (value: string) => {

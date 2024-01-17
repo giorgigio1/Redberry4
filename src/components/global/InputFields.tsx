@@ -27,9 +27,7 @@ export const InputFields = ({
   const [touched, setTouched] = useState(false);
 
   const isValid =
-    touched &&
-    validation &&
-    validation.every((item) => item.func(field.value));
+    touched && validation && validation.every((item) => item.func(field.value));
 
   return (
     <WrapperDiv>
@@ -53,7 +51,11 @@ export const InputFields = ({
             <li
               key={index}
               className={
-                touched ? (!item.func(field.value) ? "text-danger" : "text-success") : ""
+                touched
+                  ? !item.func(field.value)
+                    ? "text-danger"
+                    : "text-success"
+                  : ""
               }
             >
               {item.strong && touched && !item.func(field.value) ? (

@@ -53,6 +53,9 @@ const BlogView: React.FC = () => {
     nextArrow: <NextArrow />,
   };
 
+  // console.log("blogs", blogs)
+  // console.log("blog", blog)
+
   return (
     <div>
       <article className="blogView">
